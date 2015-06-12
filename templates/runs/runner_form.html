@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+<script src="{% static 'js/gen_validatorv4.js' %}"></script>
+<style type="text/css">
+    .event-box {
+        background: url({{ MEDIA_URL }}{{rundata.banner}}) no-repeat fixed center ;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding-bottom: 40px;
+}
+</style>
+
+<section class="event-box top-margin">
+    <div class="container"> 
+    	    <div class="section-heading">
+		<h2>{{rundata.name}}</h2>
+
+            </div>
+	    {% if rundata.state == 1 %}
+            <div class="row">
+		<div class="text-event col-lg-8 col-md-8 col-sm-12">
+			<p>{{rundata.description}}</p>
+			<div>
+			    <p>Día del evento: {{rundata.date|date:"d M Y"}}</p>
+			    <p>Hora de largada: {{rundata.date|date:"H:i"}}</p>
+			    {% if rundata.price %}
+			    <p>Precio: ${{rundata.price}}</p>
+			    {% endif %}
+			    {% if rundata.payment_method %}
+			    <p>Forma de Pago: {{rundata.payment_method}}</p>
+			    {% endif %}
+			    {% if rundata.payment_place %}
+			    <p>Lugar de Pago: {{rundata.payment_place}}</p>
+			    {% endif %}
+			    {% if rundata.medical_record %}
+			    <p><a target="_blank" href="{{ MEDIA_URL }}{{rundata.medical_record}}">Ficha Medica</a></p>
+			    {% endif %}
+			    {% if rundata.demarcation %}
+			    <p><a target="_blank" href="{{ MEDIA_URL }}{{rundata.demarcation}}">Deslinde de Responsabilidades</a></p>
+			    {% endif %}
+			    {% if rundata.travel %}
+                            <p><a target="_blank" href="{{ MEDIA_URL }}{{rundata.travel}}">Recorrido</a></p>
+                            {% endif %}
+			    {% if rundata.regulation %}
+                            <p><a target="_blank" href="{{ MEDIA_URL }}{{rundata.regulation}}">Reglamento</a></p>
+                            {% endif %}	
+			    {% if rundata.how_to_get %}
+                            <p><a target="_blank" href="{{ MEDIA_URL }}{{rundata.how_to_get}}">Como llegar?</a></p>
+                            {% endif %}
+			    {% if rundata.accommodation %}
+                            <p><a target="_blank" href="{{ MEDIA_URL }}{{rundata.accommodation}}">Alojamientos</a></p>
+                            {% endif %}
+
+			</div>
+               </div> 
+
+               <div class="form-css col-lg-4 col-md-4 col-sm-12">
+                    <form id="prueba" action="." method="post" class="form">
+                    <h3>Registrarse</h3>
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    <button type="submit" class="btn btn-success">Registrarse</button>
+                    </form>
+                </div>
+            </div>
+
+            {% else %}
+		
+	    <div class="row">
+		<div class="text-event col-lg-6 col-md-6 col-sm-12">
+                        <p>{{rundata.description}}</p>
+
+               </div>
+                <div class="text-event col-lg-6 col-md-6 col-sm-12">
+                        {% if rundata.results %}
+                        <p><a target="_blank" href="{{ MEDIA_URL }}{{rundata.results}}">Resultados</a></p>
+                        {% endif %}
+               </div>
+            </div>
+
+
+	    {% endif %}
+   </div>
+</section> 
+
+<div class="head-box" style="margin-top:-20px;">
+                <div class="container">
+                                <div class="row">
+                        		<div class="col-sm-12">
+					<h2 class="text-center text-uppercase last">Entrena tu cuerpo, Supera tus limites </h2>
+		                        <!-- <p class="text-center last">Lorem ipsum dolor sit amet in reprehenderit in voluptate velit esse cillum
+                        dolore eu fugiat nulla pariatur.</p> -->
+			                </div>
+                		</div>
+                </div>
+</div>
+
+{% if rundata.state == 1 %}
+<script language="JavaScript" type="text/javascript" xml:space="preserve">
+	var frmvalidator  = new Validator("prueba");
+        frmvalidator.addValidation("id_firstname","req","Por favor ingrese su Nombre");
+        frmvalidator.addValidation("id_firstname","maxlen=64",  "El Nombre tiene una longitud max. de 64 caracteres");
+        frmvalidator.addValidation("id_firstname","alpha","El Nombre solo permite caracteres alfabeticos");
+        frmvalidator.addValidation("id_lastname","req","Por favor ingrese su Apellido");
+        frmvalidator.addValidation("id_lastname","maxlen=64","El Apellido tiene una longitud max. de 64 caracteres");
+        frmvalidator.addValidation("id_lastname","alpha","El Apellido solo permite caracteres alfabeticos");
+        frmvalidator.addValidation("id_email","maxlen=75", "El Email tiene una longitud max. de 75 caracteres");
+        frmvalidator.addValidation("id_email","req", "Por favor ingrese su Email");
+        frmvalidator.addValidation("id_email","email", "Por favor ingrese una dirección de correo electrónico");
+        frmvalidator.addValidation("id_phone","maxlen=64", "El Teléfono tiene una longitud max. de 64 caracteres");
+        frmvalidator.addValidation("id_phone","req", "Por favor ingrese su número de teléfono");
+        frmvalidator.addValidation("id_phone","numeric","El número de teléfono solo permite caracteres numericos");
+        frmvalidator.addValidation("id_emergency_contact","maxlen=64", "El Contacto de Emergencia tiene una longitud max. de 64 caracteres");
+        frmvalidator.addValidation("id_emergency_contact","req", "Por favor ingrese su Contacto de Emergencia");
+        frmvalidator.addValidation("id_emergency_contact","numeric", "El Contacto de Emergencia solo permite caracteres numericos");
+        frmvalidator.addValidation("id_address","req", "Por favor ingrese su dirección");
+        frmvalidator.addValidation("id_address","maxlen=64", "La dirección tiene una longitud max. de 64 caracteres");
+        frmvalidator.addValidation("id_document","req", "Por favor ingrese su documento");
+        frmvalidator.addValidation("id_document","maxlen", "El documento tiene una longitud max. de 32 caracteres");
+        frmvalidator.addValidation("id_document","numeric", "El documento solo permite caracteres numericos");
+</script>
+{% endif %}
+
+{% endblock %}

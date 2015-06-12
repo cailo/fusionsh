@@ -1,0 +1,146 @@
+{% spaceless %}
+
+{% load static %}
+{% load compress %}
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Fusion SH</title>
+
+	{% compress css %}
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/css/bootstrap-select.min.css">	
+	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap-theme.css' %}"> 
+	<link rel="stylesheet" href="{% static 'css/style2.css' %}">
+
+	{% endcompress %}
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="{% static "js/html5shiv.js" %}"></script>
+	<script src="{% static "js/respond.min.js" %}"></script>
+	<![endif]-->
+
+    </head>
+    <body>
+
+	<div class="navbar navbar-inverse">
+	    <div class="container">
+		<div class="navbar-header">
+		    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+			<a class="navbar-brand" href="#">
+			<img src="{% static "images/logo.png" %}" alt="FusionSH"/>
+			</a>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav pull-right mainNav">
+				<li class="active"><a href="/">Inicio</a></li>
+				<li><a href="/about/">Quienes Somos</a></li>
+				<li><a href="/activities/">Actividades</a></li>
+				<li><a href="#">Galeria</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Eventos<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						{% for run in run_list %}
+						<li><a href="{% url 'runner_create' run.pk %}">{{ run }}</a></li>
+						{% endfor %}
+					</ul>
+				</li>
+				<li><a href="#">Galeria</a></li>
+			</ul>
+		</div>
+		<!--/.nav-collapse -->
+	    </div>
+	</div>
+	<!-- /.navbar -->	
+	
+	{% block content %}{% endblock %}	
+	
+	<footer id="footer">
+		<div class="container">
+			<div class="social text-center">
+				<a href="https://twitter.com/fusionshsl"><i class="fa fa-twitter"></i></a>
+				<a href="https://www.facebook.com/entrenamiento.sanluis"><i class="fa fa-facebook"></i></a>
+				<a href="#"><i class="fa fa-youtube"></i></a>
+				<a href="#"><i class="fa fa-google-plus"></i></a>
+				<!-- <a href="#"><i class="fa fa-dribbble"></i></a>
+				<a href="#"><i class="fa fa-flickr"></i></a>
+				<a href="#"><i class="fa fa-github"></i></a> -->
+			</div>
+
+			<div class="clear"></div>
+
+			<!--CLEAR FLOATS-->
+		</div>
+		<div class="footer2">
+			<div class="container">
+				<div class="row">
+
+					<div class="col-md-6 panel">
+						<div class="panel-body">
+							<p class="simplenav">
+								<a href="#">Inicio</a> | 
+								<a href="#">Quienes Somos</a> |
+								<a href="#">Actividades</a> |
+								<a href="#">Galeria</a> |
+								<a href="/eventos">Eventos</a> |
+								<a href="#">Contacto</a>
+							</p>
+						</div>
+					</div>
+
+					<div class="col-md-6 panel">
+						<div class="panel-body">
+							<p class="text-right">
+								Copyright &copy; 2015
+							</p>
+						</div>
+					</div>
+
+				</div>
+				<!-- /row of panels -->
+			</div>
+		</div>
+	</footer>
+	
+	{% compress js %}
+        <script src="{% static "js/modernizr-latest.js" %}"></script> 
+        <!-- jQuery -->
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <!-- Bootstrap -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/locales/bootstrap-datepicker.es.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/bootstrap-select.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/i18n/defaults-es_CL.min.js"></script>
+        <script type="text/javascript">
+        $(function () {
+            $('#id_birthday').datepicker({
+                 language: "es",
+                 autoclose: true,
+                 todayHighlight: true,
+             });
+        });
+        $(function() {
+                $('#id_nationality, #id_gender, #id_distance, #id_category, #id_size').selectpicker();
+        });
+        </script>
+ 	<script type="text/javascript">
+	    $(document).ready(function(){
+		$('.carousel').carousel();
+	    });
+	</script>
+
+        {% endcompress %}
+
+    </body>
+</html>
+{% endspaceless %}

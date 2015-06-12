@@ -1,0 +1,72 @@
+[
+{
+    "fields": {
+        "name": "4KM Participativo"
+    },
+    "model": "runs.distance",
+    "pk": 1
+},
+{
+    "fields": {
+        "name": "4KM Competitivo"
+    },
+    "model": "runs.distance",
+    "pk": 2
+},
+{
+    "fields": {
+        "name": "6KM"
+    },
+    "model": "runs.distance",
+    "pk": 3
+},
+{
+    "fields": {
+        "name": "8KM"
+    },
+    "model": "runs.distance",
+    "pk": 4
+},
+{
+    "fields": {
+        "name": "10KM"
+    },
+    "model": "runs.distance",
+    "pk": 5
+},
+{
+    "fields": {
+        "name": "12KM"
+    },
+    "model": "runs.distance",
+    "pk": 6
+},
+{
+    "fields": {
+        "name": "16KM"
+    },
+    "model": "runs.distance",
+    "pk": 7
+},
+{
+    "fields": {
+        "name": "21KM"
+    },
+    "model": "runs.distance",
+    "pk": 8
+},
+{
+    "fields": {
+        "name": "42KM"
+    },
+    "model": "runs.distance",
+    "pk": 9
+},
+{
+    "fields": {
+        "name": "80KM"
+    },
+    "model": "runs.distance",
+    "pk": 10
+}
+]

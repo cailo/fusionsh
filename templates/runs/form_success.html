@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+<style type="text/css">
+    .event-box {
+        background: url({{ MEDIA_URL }}{{rundata.banner}}) no-repeat fixed center ;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        padding-bottom: 40px;
+}
+</style>
+
+<section class="event-box top-margin">
+    <div class="container"> 
+    	    <div class="section-heading">
+		<h2>{{rundata.name}}</h2>
+
+            </div>
+            <div class="row">
+       		<div class="form-css col-lg-4 col-md-4 col-sm-12">
+		    <br />
+		    <h4> {{runnerdata.firstname}} Se Registro Correctamente</h4>
+                </div>
+		
+		<div class="text-event col-lg-8 col-md-8 col-sm-12">
+			<p>{{rundata.description}}</p>
+			
+			<div>
+                            <p>Día y Hora: {{rundata.date}}</p>
+                            {% if rundata.price %}
+                            <p>Precio: ${{rundata.price}}</p>
+                            {% endif %}
+                            {% if rundata.payment_method %}
+                            <p>Forma de Pago: {{rundata.payment_method}}</p>
+                            {% endif %}
+                            {% if rundata.payment_place %}
+                            <p>Lugar de Pago: {{rundata.payment_place}}</p>
+                            {% endif %}
+                            {% if rundata.medical_record %}
+                            <p><a target="_blank" href="{{ MEDIA_URL }}{{rundata.medical_record}}">Ficha Medica</a></p>
+                            {% endif %}
+                            {% if rundata.demarcation %}
+                            <p><a target="_blank" href="{{ MEDIA_URL }}{{rundata.demarcation}}">Deslinde de Responsabilidades</a></p>
+                            {% endif %}
+                        </div>
+               </div> 
+            </div>
+   </div>
+</section> 
+<div class="head-box" style="margin-top:-20px;">
+                <div class="container">
+                                <div class="row">
+                                        <div class="col-sm-12">
+                                        <h2 class="text-center text-uppercase last">Entrena tu cuerpo, Supera tus limites </h2>
+                                        <!-- <p class="text-center last">Lorem ipsum dolor sit amet in reprehenderit in voluptate velit esse cillum
+                        dolore eu fugiat nulla pariatur.</p> -->
+                                        </div>
+                                </div>
+                </div>
+</div>
+{% endblock %}

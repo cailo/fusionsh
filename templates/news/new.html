@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% load django_markdown %}
+
+{% block content %}
+<header id="head" class="secondary">
+                <div class="container">
+                        <div class="row">
+                                <div class="col-sm-8">
+                                        <h1>NOTICIAS</h1>
+                                </div>
+                        </div>
+                </div>
+        </header>
+
+                <section class="container">
+                       <div class="row new-text">
+				<article class="col-md-12 maincontent">
+				<br>
+				{% block blog_entries %}
+				<h3>{{ object.title }}</h3>
+				<p>{{ object.created|date:"d M Y" }}</p>
+                                {{ object.body|markdown }}<br />
+                                {% endblock %}
+                                
+                                </article>
+                        </div>
+                </section>
+{% endblock %}
+
