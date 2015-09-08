@@ -56,7 +56,7 @@
 			    {% if rundata.accommodation %}
                             <p><a target="_blank" href="{{ MEDIA_URL }}{{rundata.accommodation}}">Alojamientos</a></p>
                             {% endif %}
-
+                            <p>Distancias: {% for distance in rundata.distances.all %}{{ distance }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
 			</div>
                </div> 
 

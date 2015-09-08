@@ -41,3 +41,14 @@ class RunnerAdmin(ImportExportModelAdmin):
     get_name.admin_order_field  = 'run'  
     get_name.short_description = 'Carrera'
 
+
+#class RunnerInline(admin.TabularInline):
+#    model = Runner
+
+#class RunAdmin(admin.ModelAdmin):
+#    inline = [
+#        RunnerInline,
+#    ]
+
+
+#admin.site.register(RunAdmin, Run)
