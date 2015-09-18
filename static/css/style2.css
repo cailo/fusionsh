@@ -103,7 +103,8 @@ label {
 margin: 7px 0 0 0;
 } 
 .navbar-inverse .navbar-brand img {
-	width: 171px;
+	margin-top: -27px;
+	width: 70px;
 }
 .section-title {
 	margin-bottom: 20px;
@@ -939,4 +940,5 @@ max-height: 800px; /* This is your slider height */
 .text, .new-text {
     color: #606577;
 }
+
 

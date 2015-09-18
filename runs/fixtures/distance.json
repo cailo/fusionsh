@@ -50,23 +50,30 @@
 },
 {
     "fields": {
-        "name": "21KM"
+        "name": "18KM"
     },
     "model": "runs.distance",
     "pk": 8
 },
 {
     "fields": {
-        "name": "42KM"
+        "name": "21KM"
     },
     "model": "runs.distance",
     "pk": 9
 },
 {
     "fields": {
-        "name": "80KM"
+        "name": "42KM"
     },
     "model": "runs.distance",
     "pk": 10
+},
+{
+    "fields": {
+        "name": "80KM"
+    },
+    "model": "runs.distance",
+    "pk": 11
 }
 ]

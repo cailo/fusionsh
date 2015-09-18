@@ -11,37 +11,21 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Entry',
+            name='New',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('title', models.CharField(max_length=200)),
-                ('body', models.TextField()),
-                ('slug', models.SlugField(unique=True, max_length=200)),
-                ('publish', models.BooleanField(default=True)),
+                ('title', models.CharField(max_length=255, verbose_name=b'titulo')),
+                ('body', models.TextField(verbose_name=b'contenido')),
+                ('slug', models.SlugField(unique=True, max_length=255)),
+                ('publish', models.BooleanField(default=True, verbose_name=b'publicado')),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('modified', models.DateTimeField(auto_now=True)),
             ],
             options={
                 'ordering': ['-created'],
-                'verbose_name': 'Blog Entry',
-                'verbose_name_plural': 'Blog Entries',
+                'verbose_name': 'noticia',
+                'verbose_name_plural': 'noticias',
             },
             bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='Tag',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('slug', models.SlugField(unique=True, max_length=200)),
-            ],
-            options={
-            },
-            bases=(models.Model,),
-        ),
-        migrations.AddField(
-            model_name='entry',
-            name='tags',
-            field=models.ManyToManyField(to='news.Tag'),
-            preserve_default=True,
         ),
     ]

@@ -30,17 +30,16 @@ class RunAdmin(MarkdownModelAdmin):
     }
     formfield_overrides = {TextField: {'widget': AdminMarkdownWidget}}
 
-
 @admin.register(Runner)
 class RunnerAdmin(ImportExportModelAdmin):
     search_fields = ['firstname', 'lastname', 'document']
-    list_filter = ('run__name', 'category', 'gender', 'nationality')
-    list_display = ('firstname', 'lastname', 'document', 'gender', 'nationality', 'get_name')
+    list_filter = ('run__name', 'category', 'gender', 'distance', 'nationality')
+    list_display = ('firstname', 'lastname', 'document', 'gender', 'distance', 'category')
+    #list_display = ('firstname', 'lastname', 'document', 'gender', 'distance', 'get_name')
     def get_name(self, obj):
         return obj.run.name
     get_name.admin_order_field  = 'run'  
     get_name.short_description = 'Carrera'
-
 
 #class RunnerInline(admin.TabularInline):
 #    model = Runner

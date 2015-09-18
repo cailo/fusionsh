@@ -1,66 +1,106 @@
-{% extends "base.html" %}
 {% load static %}
 {% load bootstrap3 %}
+{% load compress %}
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Fusion SH</title>
+
+        {% compress css %}
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/css/bootstrap-select.min.css">
+        <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap-theme.css' %}">
+        <link rel="stylesheet" href="{% static 'css/runs.css' %}">
+
+        {% endcompress %}
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="{% static "js/html5shiv.js" %}"></script>
+        <script src="{% static "js/respond.min.js" %}"></script>
+        <![endif]-->
+
+    </head>
+
 
 {% block content %}
 
+<script src="{% static 'js/gen_validatorv4.js' %}"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js"></script>
 <style type="text/css">
-    .event-box {
-        background: url({{ MEDIA_URL }}{{rundata.banner}}) no-repeat fixed center ;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        padding-bottom: 40px;
+header{
+  padding: 50px 0px 0px 0px;
+  height: 460px;
+  background: url({{ MEDIA_URL }}{{rundata.banner}});
+  background-color: white!important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
 }
+
+.leparc {
+  /*padding: 50px 0px 0px 0px;*/
+  height: 460px;
+  background: url({{ MEDIA_URL }}{{rundata.banner2}});
+  background-color: white!important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+}
+
 </style>
 
-<section class="event-box top-margin">
-    <div class="container"> 
-    	    <div class="section-heading">
-		<h2>{{rundata.name}}</h2>
+<section class="sponsors">
+  <div class="row">
+    <h1>{{runnerdata.firstname}} Se Registro Correctamente.</h1>
+  </div>
+</section>
 
-            </div>
-            <div class="row">
-       		<div class="form-css col-lg-4 col-md-4 col-sm-12">
-		    <br />
-		    <h4> {{runnerdata.firstname}} Se Registro Correctamente</h4>
-                </div>
-		
-		<div class="text-event col-lg-8 col-md-8 col-sm-12">
-			<p>{{rundata.description}}</p>
-			
-			<div>
-                            <p>Día y Hora: {{rundata.date}}</p>
-                            {% if rundata.price %}
-                            <p>Precio: ${{rundata.price}}</p>
-                            {% endif %}
-                            {% if rundata.payment_method %}
-                            <p>Forma de Pago: {{rundata.payment_method}}</p>
-                            {% endif %}
-                            {% if rundata.payment_place %}
-                            <p>Lugar de Pago: {{rundata.payment_place}}</p>
-                            {% endif %}
-                            {% if rundata.medical_record %}
-                            <p><a target="_blank" href="{{ MEDIA_URL }}{{rundata.medical_record}}">Ficha Medica</a></p>
-                            {% endif %}
-                            {% if rundata.demarcation %}
-                            <p><a target="_blank" href="{{ MEDIA_URL }}{{rundata.demarcation}}">Deslinde de Responsabilidades</a></p>
-                            {% endif %}
-                        </div>
-               </div> 
-            </div>
-   </div>
-</section> 
-<div class="head-box" style="margin-top:-20px;">
-                <div class="container">
-                                <div class="row">
-                                        <div class="col-sm-12">
-                                        <h2 class="text-center text-uppercase last">Entrena tu cuerpo, Supera tus limites </h2>
-                                        <!-- <p class="text-center last">Lorem ipsum dolor sit amet in reprehenderit in voluptate velit esse cillum
-                        dolore eu fugiat nulla pariatur.</p> -->
-                                        </div>
-                                </div>
-                </div>
-</div>
+
+
+
+<!-- HEADER
+     ================================================== -->	  
+<header>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <img src='{{ MEDIA_URL }}{{rundata.logotype}}' class='logo'>
+        <p class="lead">07 de Diciembre - San Luis</p>
+      </div>	  
+    </div>    
+  </div>
+</header>
+
+<!-- SOCIAL
+       ================================================== -->
+<section class="social">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Conectá con nosotros</h2>
+	<a href="https://www.facebook.com/entrenamiento.sanluis"><i class="fa fa-facebook"></i></a>
+	<a href="https://twitter.com/fusionshsl"><i class="fa fa-twitter"></i></a>
+      </div>
+    </div>
+  </div>	  
+</section>
+
+{% compress js %}
+        <script src="{% static "js/modernizr-latest.js" %}"></script>
+        <!-- jQuery -->
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <!-- Bootstrap -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.js"></script>
+{% endcompress %}
+
 {% endblock %}

@@ -1,108 +1,257 @@
-{% extends "base.html" %}
 {% load static %}
 {% load bootstrap3 %}
+{% load compress %}
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Fusion SH</title>
+
+        {% compress css %}
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/css/bootstrap-select.min.css">
+        <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap-theme.css' %}">
+        <link rel="stylesheet" href="{% static 'css/runs.css' %}">
+
+        {% endcompress %}
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="{% static "js/html5shiv.js" %}"></script>
+        <script src="{% static "js/respond.min.js" %}"></script>
+        <![endif]-->
+
+    </head>
+
 
 {% block content %}
 
 <script src="{% static 'js/gen_validatorv4.js' %}"></script>
-<style type="text/css">
-    .event-box {
-        background: url({{ MEDIA_URL }}{{rundata.banner}}) no-repeat fixed center ;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-        padding-bottom: 40px;
+
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script> 
+function initialize() {
+  var mapCanvas = document.getElementById('map');
+  var mapCenter = new google.maps.LatLng(-33.2331247,-66.2264154);
+  var mapOptions = {
+        center: mapCenter,
+        zoom: 16,
+        scrollwheel: false,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+  }
+
+  var map = new google.maps.Map(mapCanvas, mapOptions);
+
+  var marker = new google.maps.Marker({
+      position: mapCenter,
+      map: map,
+      title: 'Parque Nativo'
+  });
 }
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+<style type="text/css">
+header{
+  padding: 50px 0px 0px 0px;
+  height: 460px;
+  background: url({{ MEDIA_URL }}{{rundata.banner}});
+  background-color: white!important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+.leparc {
+  /*padding: 50px 0px 0px 0px;*/
+  height: 460px;
+  background: url({{ MEDIA_URL }}{{rundata.banner2}});
+  background-color: white!important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+}
+
 </style>
 
-<section class="event-box top-margin">
-    <div class="container"> 
-    	    <div class="section-heading">
-		<h2>{{rundata.name}}</h2>
+<!-- HEADER
+     ================================================== -->	  
+<header>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <img src='{{ MEDIA_URL }}{{rundata.logotype}}' class='logo'>
+        <p class="lead">07 de Diciembre - San Luis</p>
+      </div>	  
+    </div>    
+  </div>
+</header>
 
-            </div>
-	    {% if rundata.state == 1 %}
-            <div class="row">
-		<div class="text-event col-lg-8 col-md-8 col-sm-12">
-			<p>{{rundata.description}}</p>
-			<div>
-			    <p>Día del evento: {{rundata.date|date:"d M Y"}}</p>
-			    <p>Hora de largada: {{rundata.date|date:"H:i"}}</p>
-			    {% if rundata.price %}
-			    <p>Precio: ${{rundata.price}}</p>
-			    {% endif %}
-			    {% if rundata.payment_method %}
-			    <p>Forma de Pago: {{rundata.payment_method}}</p>
-			    {% endif %}
-			    {% if rundata.payment_place %}
-			    <p>Lugar de Pago: {{rundata.payment_place}}</p>
-			    {% endif %}
-			    {% if rundata.medical_record %}
-			    <p><a target="_blank" href="{{ MEDIA_URL }}{{rundata.medical_record}}">Ficha Medica</a></p>
-			    {% endif %}
-			    {% if rundata.demarcation %}
-			    <p><a target="_blank" href="{{ MEDIA_URL }}{{rundata.demarcation}}">Deslinde de Responsabilidades</a></p>
-			    {% endif %}
-			    {% if rundata.travel %}
-                            <p><a target="_blank" href="{{ MEDIA_URL }}{{rundata.travel}}">Recorrido</a></p>
-                            {% endif %}
-			    {% if rundata.regulation %}
-                            <p><a target="_blank" href="{{ MEDIA_URL }}{{rundata.regulation}}">Reglamento</a></p>
-                            {% endif %}	
-			    {% if rundata.how_to_get %}
-                            <p><a target="_blank" href="{{ MEDIA_URL }}{{rundata.how_to_get}}">Como llegar?</a></p>
-                            {% endif %}
-			    {% if rundata.accommodation %}
-                            <p><a target="_blank" href="{{ MEDIA_URL }}{{rundata.accommodation}}">Alojamientos</a></p>
-                            {% endif %}
-                            <p>Distancias: {% for distance in rundata.distances.all %}{{ distance }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-			</div>
-               </div> 
 
-               <div class="form-css col-lg-4 col-md-4 col-sm-12">
+<!-- CALL FOR CHARLAS
+        ================================================== -->
+<section class="features">
+  <div class="container">
+    <div class="row">
+      <h1>FUSION</h1>
+      <p class="lead">(mente+cuerpo)</p>
+    </div>
+  </div>
+</section>
+
+<section class="purchase">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8">
+        <h1>¿Hasta cuándo hay tiempo?</h1>
+        <p class="lead">Hasta el <b>{{rundata.date_limit}}.</p>
+        </br>
+        <h1>Qué requerimientos debe respetar?</h1>
+        <p class="lead">{{rundata.description}}</p>
+	{% if rundata.price %}
+	<p class="lead"><b>Precio:</b> ${{rundata.price}}</p>
+	{% endif %}
+	{% if rundata.payment_method %}
+	<p class="lead"><b>Forma de Pago:</b> {{rundata.payment_method}}</p>
+	{% endif %}
+	{% if rundata.payment_place %}
+	<p class="lead"><b>Lugar de Pago:</b> {{rundata.payment_place}}</p>
+	{% endif %}
+	<p class="lead"><b>Distancias:</b> {% for distance in rundata.distances.all %}{{ distance }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+ 	{% if rundata.medical_record %}
+	<a target="_blank" href="{{ MEDIA_URL }}{{rundata.medical_record}}" class="btn btn-lg btn-info">Ficha Medica</a></br></br>
+	{% endif %}
+	{% if rundata.demarcation %}
+	<a target="_blank" href="{{ MEDIA_URL }}{{rundata.demarcation}}" class="btn btn-lg btn-info" >Deslinde de Responsabilidades</a></br></br>
+	{% endif %}
+	{% if rundata.travel %}
+	<a target="_blank" href="{{ MEDIA_URL }}{{rundata.travel}}" class="btn btn-lg btn-info">Recorrido</a></br></br>
+	{% endif %}
+	{% if rundata.regulation %}
+	<a target="_blank" href="{{ MEDIA_URL }}{{rundata.regulation}}" class="btn btn-lg btn-info">Reglamento</a></br></br>
+	{% endif %}
+	{% if rundata.how_to_get %}
+	<a target="_blank" href="{{ MEDIA_URL }}{{rundata.how_to_get}}" class="btn btn-lg btn-info">Como llegar?</a></br></br>
+	{% endif %}
+	{% if rundata.accommodation %}
+	<a target="_blank" href="{{ MEDIA_URL }}{{rundata.accommodation}}" class="btn btn-lg btn-info" >Alojamientos</a></p>
+	{% endif %}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="sponsors">
+  <div class="row">
+    <h1>¿Querés participar?</h1>
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#inscripcion">Proximamente</button>
+  </div>
+</section> -->
+
+<section class="sponsors">
+  <div class="row">
+    <h1>¿Querés participar?</h1>
+               {% if rundata.state == 1 %}
+               <div class="col-md-4"></div>	
+               <div class="col-md-4">
                     <form id="prueba" action="." method="post" class="form">
-                    <h3>Registrarse</h3>
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    <button type="submit" class="btn btn-primary">Registrarse</button>
+                    </form>
+                </div>
+               <div class="col-md-4"></div>	
+               {% else %}
+               <button type="button" class="btn btn-primary disabled" data-toggle="modal" data-target="#inscripcion">Proximamente</button>
+               {% endif %}
+  </div>
+</section>
+
+<section class="venue">
+  <div class="row">
+    <h1>¿Dónde?</h1>
+    {% if rundata.place %}
+        <p class="lead">{{rundata.place}}</p>
+    {% endif %}
+    <div class="col-md-12 leparc">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 google-maps">
+      <div id='map'></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL
+       ================================================== -->
+<section class="social">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Conectá con nosotros</h2>
+	<a href="https://www.facebook.com/entrenamiento.sanluis"><i class="fa fa-facebook"></i></a>
+	<a href="https://twitter.com/fusionshsl"><i class="fa fa-twitter"></i></a>
+      </div>
+    </div>
+  </div>	  
+</section>
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="inscripcion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Inscripciones</h4>
+      </div>
+      <div class="modal-body">
+        <form id="prueba" action="." method="post" class="form">
                     {% csrf_token %}
                     {% bootstrap_form form %}
                     <button type="submit" class="btn btn-success">Registrarse</button>
-                    </form>
-                </div>
-            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div> -->
 
-            {% else %}
-		
-	    <div class="row">
-		<div class="text-event col-lg-6 col-md-6 col-sm-12">
-                        <p>{{rundata.description}}</p>
+{% compress js %}
+        <script src="{% static "js/modernizr-latest.js" %}"></script>
+        <!-- jQuery -->
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <!-- Bootstrap -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/locales/bootstrap-datepicker.es.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/bootstrap-select.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/i18n/defaults-es_CL.min.js"></script>
+        <script type="text/javascript">
+        $(function () {
+            $('#id_birthday').datepicker({
+                 language: "es",
+                 autoclose: true,
+                 todayHighlight: true,
+             });
+        });
+        $(function() {
+                $('#id_nationality, #id_gender, #id_distance, #id_category, #id_size').selectpicker();
+        });
+        </script>
+{% endcompress %}
 
-               </div>
-                <div class="text-event col-lg-6 col-md-6 col-sm-12">
-                        {% if rundata.results %}
-                        <p><a target="_blank" href="{{ MEDIA_URL }}{{rundata.results}}">Resultados</a></p>
-                        {% endif %}
-               </div>
-            </div>
-
-
-	    {% endif %}
-   </div>
-</section> 
-
-<div class="head-box" style="margin-top:-20px;">
-                <div class="container">
-                                <div class="row">
-                        		<div class="col-sm-12">
-					<h2 class="text-center text-uppercase last">Entrena tu cuerpo, Supera tus limites </h2>
-		                        <!-- <p class="text-center last">Lorem ipsum dolor sit amet in reprehenderit in voluptate velit esse cillum
-                        dolore eu fugiat nulla pariatur.</p> -->
-			                </div>
-                		</div>
-                </div>
-</div>
-
-{% if rundata.state == 1 %}
-<script language="JavaScript" type="text/javascript" xml:space="preserve">
+{% if rundata.state == 1 %} <script language="JavaScript" type="text/javascript" xml:space="preserve">
 	var frmvalidator  = new Validator("prueba");
         frmvalidator.addValidation("id_firstname","req","Por favor ingrese su Nombre");
         frmvalidator.addValidation("id_firstname","maxlen=64",  "El Nombre tiene una longitud max. de 64 caracteres");

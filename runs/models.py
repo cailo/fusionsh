@@ -34,21 +34,24 @@ class Run(models.Model):
     """
     STATE_CHOICES = (
         (1, 'Activado'),
-        (2, 'Desactivado'),
-        (3, 'Suspendido')
+        (2, 'Desactivado')
     )
     name = models.CharField('nombre', max_length=64)
+    logotype = models.ImageField('logotipo', upload_to='banners')
+    banner = models.ImageField('banner', upload_to='banners')
+    date_text = models.CharField('fecha texto', max_length=128)
+    date_limit = models.CharField('fecha limite', max_length=128)
     description = models.TextField('descripción',)
     date = models.DateTimeField('fecha')
     quota = models.PositiveIntegerField('cupo')
     place = models.CharField('lugar', max_length=64)
     distances = models.ManyToManyField(Distance, verbose_name='distancias')
     price = models.DecimalField('precio', max_digits=6, decimal_places=2, null=True, blank=True)
-    banner = models.ImageField('banner', upload_to='banners')
+    banner2 = models.ImageField('banner2', upload_to='banners')
     advertising = models.FileField('publicidad', upload_to='archives', null=True, blank=True)
     timetable = models.FileField('cronograma', upload_to='archives', null=True, blank=True)
     demarcation = models.FileField('deslinde', upload_to='archives', null=True, blank=True)
-    medical_record = models.FileField('ficha', upload_to='archives', null=True, blank=True)
+    medical_record = models.FileField('ficha medica', upload_to='archives', null=True, blank=True)
     regulation = models.FileField('reglamento', upload_to='archives', null=True, blank=True)
     travel = models.FileField('recorrido', upload_to='archives', null=True, blank=True)
     accommodation = models.FileField('alojamiento', upload_to='archives', null=True, blank=True)
@@ -57,8 +60,8 @@ class Run(models.Model):
     payment_place = models.CharField('lugar de pago', max_length=64, null=True, blank=True)
     categories = models.ManyToManyField(Category, verbose_name='categorías')
     state = models.PositiveIntegerField('estado', choices=STATE_CHOICES)
-    results_general = models.FileField('rgeneral', upload_to='archives', null=True, blank=True)
-    results_category = models.FileField('rcategoria', upload_to='archives', null=True, blank=True)
+    results_general = models.FileField('resuldos general', upload_to='archives', null=True, blank=True)
+    results_category = models.FileField('resultados x categoria', upload_to='archives', null=True, blank=True)
     gallery_link = models.CharField('galeria', max_length=255, null=True, blank=True)
 
     def __str__(self):
