@@ -1,5 +1,14 @@
+diff-match-patch==20121119
 Django==1.7.6
-Pillow==2.7.0
+django-appconf==1.0.1
 django-bootstrap3==5.1.1
+django-compressor==1.5
 django-countries==3.2
+django-import-export==0.2.7
+django-markdown==0.8.4
 gunicorn==19.3.0
+Markdown==2.6.2
+Pillow==2.7.0
+pytz==2014.10
+six==1.9.0
+tablib==0.10.0
