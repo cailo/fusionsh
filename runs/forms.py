@@ -3,6 +3,7 @@
 from django import forms
 from runs.models import Category, Distance, Run, Runner
 
+
 class RunnerForm(forms.ModelForm):
     """
     """
@@ -22,6 +23,13 @@ class RunnerForm(forms.ModelForm):
         super(RunnerForm, self).__init__(*args, **kwargs)
         # assign a (computed, I assume) default value to the choice field
         self.initial['nationality'] = 'AR'
+
+    def clean_distance(self):
+        distance = self.cleaned_data.get('distance')
+        if not Distance.objects.get(pk=distance).is_quota():
+            raise forms.ValidationError("No hay cupo en la distancia seleccionada")
+        else:
+            return distance
 
     class Meta:
         model = Runner

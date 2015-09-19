@@ -19,12 +19,21 @@ class Distance(models.Model):
     """
     """
     name = models.CharField(max_length=32)
-    prices = models.CharField(max_length=32)
-    quotas = models.PositiveIntegerField('cupo')
-    #run = models.ForeignKey(Run)
+    price = models.CharField(max_length=32)
+    quota = models.PositiveIntegerField('cupo')
 
     def __str__(self):
-        return '{} - {} - {}'.format(self.name, self.prices, self.quotas)
+        return '{} - {} - {}'.format(self.name, self.price, self.quota)
+    
+    def is_quota(self):
+        if self.quota > 0:
+            return True
+        else:
+            return False
+
+    def decrement_quota(self):
+        self.quota -= 1
+        self.save()    
 
     class Meta:
         verbose_name = 'distancia'
