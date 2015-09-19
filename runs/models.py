@@ -107,6 +107,29 @@ class Run(models.Model):
         verbose_name = 'carrera'
         verbose_name_plural = 'carreras'
 
+
+#############################################################################
+
+class Distance(models.Model):
+    """
+    """
+    name = models.CharField(max_length=32)
+    prices = models.CharField(max_length=32)
+    quotas = models.PositiveIntegerField('cupo')
+    run = models.ForeignKey(Run)
+
+    def __str__(self):
+        return '{} - {} - {}'.format(self.name, self.prices, self.quotas)
+
+    class Meta:
+        verbose_name = 'distancia'
+        verbose_name_plural = 'distancias'
+
+
+
+#############################################################################
+
+
 class Runner(models.Model):
     """
     """
