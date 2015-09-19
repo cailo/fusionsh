@@ -15,6 +15,20 @@ class Category(models.Model):
         verbose_name = 'categoría'
         verbose_name_plural = 'categorías'
 
+class Distance(models.Model):
+    """
+    """
+    name = models.CharField(max_length=32)
+    prices = models.CharField(max_length=32)
+    quotas = models.PositiveIntegerField('cupo')
+    #run = models.ForeignKey(Run)
+
+    def __str__(self):
+        return '{} - {} - {}'.format(self.name, self.prices, self.quotas)
+
+    class Meta:
+        verbose_name = 'distancia'
+        verbose_name_plural = 'distancias'
 
 class Run(models.Model):
     """
@@ -31,7 +45,7 @@ class Run(models.Model):
     description = models.TextField('descripción',)
     date = models.DateTimeField('fecha')
     place = models.CharField('lugar', max_length=64)
-    #distances = models.ManyToManyField(Distance, verbose_name='distancias')
+    distances = models.ManyToManyField(Distance, verbose_name='distancias')
     banner2 = models.ImageField('banner2', upload_to='banners')
     advertising = models.FileField('publicidad', upload_to='archives', null=True, blank=True)
     timetable = models.FileField('cronograma', upload_to='archives', null=True, blank=True)
@@ -67,23 +81,6 @@ class Run(models.Model):
     class Meta:
         verbose_name = 'carrera'
         verbose_name_plural = 'carreras'
-
-
-class Distance(models.Model):
-    """
-    """
-    name = models.CharField(max_length=32)
-    prices = models.CharField(max_length=32)
-    quotas = models.PositiveIntegerField('cupo')
-    run = models.ForeignKey(Run)
-
-    def __str__(self):
-        return '{} - {} - {}'.format(self.name, self.prices, self.quotas)
-
-    class Meta:
-        verbose_name = 'distancia'
-        verbose_name_plural = 'distancias'
-
 
 class Runner(models.Model):
     """
