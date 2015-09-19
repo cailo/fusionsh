@@ -3,13 +3,39 @@
 from django.db import models
 from django_countries.fields import CountryField
 
-class Distance(models.Model):
+class Quota(models.Model):
+    """
+    """
+    name = models.PositiveIntegerField('cupo')
+
+    def __str__(self):
+        return str(self.name)
+
+    class Meta:
+        verbose_name = 'cupo'
+        verbose_name_plural = 'cupos'
+
+class Price(models.Model):
     """
     """
     name = models.CharField(max_length=32)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'precio'
+        verbose_name_plural = 'precios'
+
+class Distance(models.Model):
+    """
+    """
+    name = models.CharField(max_length=32)
+    prices = models.ForeignKey(Price, verbose_name='precios')
+    quotas = models.ForeignKey(Quota, verbose_name='cupos')
+    
+    def __str__(self):
+        return '{} - {} - {}'.format(self.name, self.prices, self.quotas)
 
     class Meta:
         verbose_name = 'distancia'
@@ -43,10 +69,8 @@ class Run(models.Model):
     date_limit = models.CharField('fecha limite', max_length=128)
     description = models.TextField('descripción',)
     date = models.DateTimeField('fecha')
-    quota = models.PositiveIntegerField('cupo')
     place = models.CharField('lugar', max_length=64)
     distances = models.ManyToManyField(Distance, verbose_name='distancias')
-    price = models.DecimalField('precio', max_digits=6, decimal_places=2, null=True, blank=True)
     banner2 = models.ImageField('banner2', upload_to='banners')
     advertising = models.FileField('publicidad', upload_to='archives', null=True, blank=True)
     timetable = models.FileField('cronograma', upload_to='archives', null=True, blank=True)
@@ -71,19 +95,13 @@ class Run(models.Model):
     def get_absolute_url(self):
 	return "/carreras/%i/" % self.id    
     
-    #def is_quota(self):
-    #    if self.quota > 0:
-    #        return True
-    #    else:
-    #        return False
-
-    def decrement_quota(self):
-        self.quota -= 1
-        self.save()
-        if self.quota == 0:
-            self.state = 2
-            self.save()
-            return
+    #def decrement_quota(self):
+    #    self.quota -= 1
+    #    self.save()
+    #    if self.quota == 0:
+    #        self.state = 2
+    #        self.save()
+    #        return
 
     class Meta:
         verbose_name = 'carrera'

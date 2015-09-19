@@ -35,7 +35,7 @@ class RunnerCreateView(CreateView):
     def form_valid(self, form):
 	form = form.instance
         run = Run.objects.get(pk=self.kwargs['pk'])
-        run.decrement_quota()
+        #run.decrement_quota()
         form.run = run
 	form.save()
 	return super(RunnerCreateView, self).form_valid(form)

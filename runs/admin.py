@@ -9,8 +9,15 @@ from django.db.models import TextField
 
 from import_export.admin import ImportExportModelAdmin
 from django.forms import CheckboxSelectMultiple
-from runs.models import Category, Distance, Run, Runner
+from runs.models import Category, Distance, Run, Runner, Price, Quota
 
+@admin.register(Quota)
+class CategoryAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Price)
+class CategoryAdmin(admin.ModelAdmin):
+    pass
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
