@@ -3,39 +3,27 @@
 from django.db import models
 from django_countries.fields import CountryField
 
-class Quota(models.Model):
-    """
-    """
-    name = models.PositiveIntegerField('cupo')
-
-    def __str__(self):
-        return str(self.name)
-
-    class Meta:
-        verbose_name = 'cupo'
-        verbose_name_plural = 'cupos'
-
-class Price(models.Model):
-    """
-    """
-    name = models.CharField(max_length=32)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = 'precio'
-        verbose_name_plural = 'precios'
 
 class Distance(models.Model):
     """
     """
     name = models.CharField(max_length=32)
-    prices = models.ForeignKey(Price, verbose_name='precios')
-    quotas = models.ForeignKey(Quota, verbose_name='cupos')
-    
+    prices = models.CharField(max_length=32)
+    quota = models.PositiveIntegerField('cupo')
+    run = models.ForeignKey(Run)
+
     def __str__(self):
         return '{} - {} - {}'.format(self.name, self.prices, self.quotas)
+
+    def is_quota(self):
+        if self.quota > 0:
+            return True
+        else:
+            return False
+
+    def decrement_quota(self):
+        self.quota -= 1
+        self.save()
 
     class Meta:
         verbose_name = 'distancia'
@@ -93,7 +81,7 @@ class Run(models.Model):
         return '{}'.format(self.name)
     
     def get_absolute_url(self):
-	return "/carreras/%i/" % self.id    
+        return "/carreras/%i/" % self.id    
     
     #def decrement_quota(self):
     #    self.quota -= 1
@@ -106,28 +94,6 @@ class Run(models.Model):
     class Meta:
         verbose_name = 'carrera'
         verbose_name_plural = 'carreras'
-
-
-#############################################################################
-
-class Distance(models.Model):
-    """
-    """
-    name = models.CharField(max_length=32)
-    prices = models.CharField(max_length=32)
-    quotas = models.PositiveIntegerField('cupo')
-    run = models.ForeignKey(Run)
-
-    def __str__(self):
-        return '{} - {} - {}'.format(self.name, self.prices, self.quotas)
-
-    class Meta:
-        verbose_name = 'distancia'
-        verbose_name_plural = 'distancias'
-
-
-
-#############################################################################
 
 
 class Runner(models.Model):
