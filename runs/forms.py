@@ -16,7 +16,7 @@ class RunnerForm(forms.ModelForm):
     def set_distances(self, run_pk):
         run = Run.objects.get(pk=run_pk)
         distance_list = [c.pk for c in run.distances.all()]
-        queryset = Distance.objects.filter(pk__in=distance_list)
+        queryset = Distance.objects.filter(pk__in=distance_list, quota__gt=0)
         self.fields['distance'] = forms.ModelChoiceField(queryset=queryset, label='Distancia')
 
     def __init__(self, *args, **kwargs):
@@ -26,7 +26,7 @@ class RunnerForm(forms.ModelForm):
 
     def clean_distance(self):
         distance = self.cleaned_data.get('distance')
-        if not Distance.objects.get(pk=distance).is_quota():
+        if not distance.is_quota():
             raise forms.ValidationError("No hay cupo en la distancia seleccionada")
         else:
             return distance

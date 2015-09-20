@@ -33,13 +33,11 @@ class RunnerCreateView(CreateView):
         return context
 
     def form_valid(self, form):
+        distance = form.cleaned_data['distance']
+        distance.decrement_quota()
+
         form = form.instance
         run = Run.objects.get(pk=self.kwargs['pk'])
-        #run.decrement_quota()
-
-        distance = form.cleaned_data.get('distance')
-        Distance.objects.get(pk=distance).decrement_quota()
-
         form.run = run
         form.save()
         return super(RunnerCreateView, self).form_valid(form)
