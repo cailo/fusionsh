@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 from django import forms
+from django.db.models import Sum
 from runs.models import Category, Distance, Run, Runner
 
 
@@ -17,6 +18,14 @@ class RunnerForm(forms.ModelForm):
         run = Run.objects.get(pk=run_pk)
         distance_list = [c.pk for c in run.distances.all()]
         queryset = Distance.objects.filter(pk__in=distance_list, quota__gt=0)
+        totalquota = Distance.objects.all().aggregate(Sum('quota'))
+        runstate = run.state
+        if (runstate == 1) and (totalquota == {'quota__sum': 0}):
+            run.no_quota()
+        elif (runstate == 2) and (totalquota != {'quota__sum': 0}):
+            run.add_quota()
+        else:
+            return
         self.fields['distance'] = forms.ModelChoiceField(queryset=queryset, label='Distancia')
 
     def __init__(self, *args, **kwargs):

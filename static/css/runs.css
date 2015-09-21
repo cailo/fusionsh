@@ -549,12 +549,16 @@ header .carousel-indicators li {
   }
 
   .logo{
-    display: block;
+   /* display: block;*/
     margin: auto;
-    width: 100px;
-    height: 100px;
+    /*width: 100px;
+    height: 100px;*/
   }
-
+  .logo img {
+    max-width:100% !important;
+    height:auto;
+    display:block;
+  }
   .leparc{
     min-height: 300px;
   }

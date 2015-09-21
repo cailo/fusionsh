@@ -44,7 +44,9 @@ class Run(models.Model):
     """
     STATE_CHOICES = (
         (1, 'Activado'),
-        (2, 'Desactivado')
+        (2, 'NoCupo'),
+        (3, 'Desactivado'),
+        (4, 'Finalizado')
     )
     name = models.CharField('nombre', max_length=64)
     logotype = models.ImageField('logotipo', upload_to='banners')
@@ -79,13 +81,15 @@ class Run(models.Model):
     def get_absolute_url(self):
 	return "/carreras/%i/" % self.id    
     
-    #def decrement_quota(self):
-    #    self.quota -= 1
-    #    self.save()
-    #    if self.quota == 0:
-    #        self.state = 2
-    #        self.save()
-    #        return
+    def no_quota(self):
+        self.state = 2
+        self.save()
+        return
+    
+    def add_quota(self):
+        self.state = 1
+        self.save()
+        return
 
     class Meta:
         verbose_name = 'carrera'

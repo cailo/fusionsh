@@ -78,7 +78,6 @@ header{
   background-repeat: no-repeat;
   color: white;
 }
-
 </style>
 
 <!-- HEADER
@@ -88,7 +87,7 @@ header{
     <div class="row">
       <div class="col-md-12">
         <img src='{{ MEDIA_URL }}{{rundata.logotype}}' class='logo'>
-        <p class="lead">07 de Diciembre - San Luis</p>
+        <p class="lead">{{rundata.date_text}}</p>
       </div>	  
     </div>    
   </div>
@@ -111,7 +110,7 @@ header{
     <div class="row">
       <div class="col-md-offset-2 col-md-8">
         <h1>¿Hasta cuándo hay tiempo?</h1>
-        <p class="lead">Hasta el <b>{{rundata.date_limit}}.</p>
+        <p class="lead">Hasta el <b>{{rundata.date_limit}}</p>
         </br>
         <h1>Qué requerimientos debe respetar?</h1>
         <p class="lead">{{rundata.description}}</p>
@@ -149,15 +148,9 @@ header{
   </div>
 </section>
 
-<!-- <section class="sponsors">
-  <div class="row">
-    <h1>¿Querés participar?</h1>
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#inscripcion">Proximamente</button>
-  </div>
-</section> -->
-
 <section class="sponsors">
-  <div class="row">
+    <div class="row">
+    {% if rundata.state != 4 %}
     <h1>¿Querés participar?</h1>
                {% if rundata.state == 1 %}
                <div class="col-md-4"></div>	
@@ -169,9 +162,24 @@ header{
                     </form>
                 </div>
                <div class="col-md-4"></div>	
+               {% elif rundata.state == 2 %}
+               <button type="button" class="btn disabled" data-toggle="modal" data-target="#inscripcion">Sin Cupos</button>
                {% else %}
                <button type="button" class="btn btn-primary disabled" data-toggle="modal" data-target="#inscripcion">Proximamente</button>
                {% endif %}
+  {% else %}
+   <h1>Resultados</h1>
+               <div class="col-md-4"></div>
+               <div class="col-md-4">
+                   {% if rundata.results_general %}
+                   <a target="_blank" href="{{ MEDIA_URL }}{{rundata.results_general}}" class="btn btn-lg btn-info" >Resultados Generales</a></p>
+                   {% endif %}
+                   {% if rundata.results_category %}
+                   <a target="_blank" href="{{ MEDIA_URL }}{{rundata.results_category}}" class="btn btn-lg btn-info" >Resultados x Categoria</a></p>
+                   {% endif %}
+                </div>
+               <div class="col-md-4"></div>
+  {% endif %}  
   </div>
 </section>
 
@@ -205,28 +213,6 @@ header{
   </div>	  
 </section>
 
-<!-- Modal -->
-<!-- <div class="modal fade" id="inscripcion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Inscripciones</h4>
-      </div>
-      <div class="modal-body">
-        <form id="prueba" action="." method="post" class="form">
-                    {% csrf_token %}
-                    {% bootstrap_form form %}
-                    <button type="submit" class="btn btn-success">Registrarse</button>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div> -->
-
 {% compress js %}
         <script src="{% static "js/modernizr-latest.js" %}"></script>
         <!-- jQuery -->
@@ -255,10 +241,8 @@ header{
 	var frmvalidator  = new Validator("prueba");
         frmvalidator.addValidation("id_firstname","req","Por favor ingrese su Nombre");
         frmvalidator.addValidation("id_firstname","maxlen=64",  "El Nombre tiene una longitud max. de 64 caracteres");
-        frmvalidator.addValidation("id_firstname","alpha","El Nombre solo permite caracteres alfabeticos");
         frmvalidator.addValidation("id_lastname","req","Por favor ingrese su Apellido");
         frmvalidator.addValidation("id_lastname","maxlen=64","El Apellido tiene una longitud max. de 64 caracteres");
-        frmvalidator.addValidation("id_lastname","alpha","El Apellido solo permite caracteres alfabeticos");
         frmvalidator.addValidation("id_email","maxlen=75", "El Email tiene una longitud max. de 75 caracteres");
         frmvalidator.addValidation("id_email","req", "Por favor ingrese su Email");
         frmvalidator.addValidation("id_email","email", "Por favor ingrese una dirección de correo electrónico");
