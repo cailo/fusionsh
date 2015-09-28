@@ -136,3 +136,4 @@ class Runner(models.Model):
     class Meta:
         verbose_name = 'corredor'
         verbose_name_plural = 'corredores'
+        unique_together = (('run', 'email'),)

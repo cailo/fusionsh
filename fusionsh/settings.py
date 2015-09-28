@@ -119,8 +119,10 @@ TEMPLATE_DIRS = (
 )
 
 #Configuraciones para enviar mensajes usando gmail
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'cailovirtual@gmail.com'
-EMAIL_HOST_PASSWORD = 'clavedelcorreo'
+
+EMAIL_HOST = 'smtp.zoho.com'
+EMAIL_HOST_USER = 'no-reply@fusionsh.com.ar'
+EMAIL_HOST_PASSWORD = 'sl987654'
 EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+

@@ -5,6 +5,7 @@ from runs.forms import RunnerForm
 from runs.models import Run, Runner
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.core.mail import send_mail
 
 
 class RunListView(ListView):
@@ -29,20 +30,36 @@ class RunnerCreateView(CreateView):
         context = super(RunnerCreateView, self).get_context_data(**kwargs)
         context['run_list'] = Run.objects.all()
         context['rundata'] = Run.objects.get(pk=self.kwargs['pk'])
-        #context['run_distances'] = Run.objects.distances.get(pk=self.kwargs['pk'])
         return context
 
     def form_valid(self, form):
         distance = form.cleaned_data['distance']
         distance.decrement_quota()
 
-        form = form.instance
         run = Run.objects.get(pk=self.kwargs['pk'])
+
+        subject = 'Te registraste correctamente. - %s - Fusion' % (
+            run.name
+            )
+        message = '%s %s te registraste correctamente en la carrera %s. \n\n Cualquier duda o inconveniente comunicarse: \n tel.: 2664488446 / info@fusionsh.com.ar \n\n Fusion.' % (
+            form.cleaned_data['firstname'],
+            form.cleaned_data['lastname'],
+            run.name
+            )
+
+        send_mail(
+            subject,
+            message,
+            'no-reply@fusionsh.com.ar',
+            [form.cleaned_data['email']],
+            fail_silently=False
+            )
+
+        form = form.instance
         form.run = run
         form.save()
+
         return super(RunnerCreateView, self).form_valid(form)
-        #return self.render_to_response(self.get_context_data(form=form))
-        #return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
         #return reverse('run_list')
@@ -54,6 +71,6 @@ class RunnerSuccess(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(RunnerSuccess, self).get_context_data(**kwargs)
         context['run_list'] = Run.objects.all()
-        #context['runnerdata'] = Runner.objects.get(pk=self)
+        context['runnerdata'] = Runner.objects.get(pk=self.kwargs['runner_pk'])
         context['rundata'] = Run.objects.get(pk=self.kwargs['pk'])
         return context
