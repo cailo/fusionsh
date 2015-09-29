@@ -16,4 +16,4 @@
 *.save
 *.sqlite3
 .venv/
-
+fusionsh/settings.py
