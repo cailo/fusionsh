@@ -38,7 +38,7 @@ class RunnerCreateView(CreateView):
 
         run = Run.objects.get(pk=self.kwargs['pk'])
 
-        subject = 'Te registraste correctamente. - %s - Fusion' % (
+        subject = 'Inscripciones %s - Fusion' % (
             run.name
             )
         message = '%s %s te registraste correctamente en la carrera %s. \n\n Cualquier duda o inconveniente comunicarse: \n tel.: 2664488446 / info@fusionsh.com.ar \n\n Fusion.' % (
@@ -71,6 +71,6 @@ class RunnerSuccess(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(RunnerSuccess, self).get_context_data(**kwargs)
         context['run_list'] = Run.objects.all()
-        context['runnerdata'] = Runner.objects.get(pk=self.kwargs['runner_pk'])
+        #context['runnerdata'] = Runner.objects.get(pk=self.kwargs['runner_pk'])
         context['rundata'] = Run.objects.get(pk=self.kwargs['pk'])
         return context

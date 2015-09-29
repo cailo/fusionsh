@@ -123,7 +123,7 @@ header{
 	{% if rundata.payment_place %}
 	<p class="lead"><b>Lugar de Pago:</b> {{rundata.payment_place}}</p>
 	{% endif %}
-	<p class="lead"><b>Distancias:</b> {% for distance in rundata.distances.all %}{{ distance }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+	<p class="lead"><b>Distancias:</b><br />1 Etapa hasta el {{rundata.date_stage}}<br />2 Etapa hasta el {{rundata.date_stage2}}<br /><br /> {% for distance in rundata.distances.all %}{{ distance }}<br />{% if not forloop.last %} {% endif %}{% endfor %}</p>
  	{% if rundata.medical_record %}
 	<a target="_blank" href="{{ MEDIA_URL }}{{rundata.medical_record}}" class="btn btn-lg btn-info">Ficha Medica</a></br></br>
 	{% endif %}

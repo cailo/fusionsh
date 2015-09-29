@@ -28,6 +28,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=32)),
+                ('price', models.CharField(max_length=32)),
+                ('quota', models.PositiveIntegerField(verbose_name=b'cupo')),
             ],
             options={
                 'verbose_name': 'distancia',
@@ -46,9 +48,7 @@ class Migration(migrations.Migration):
                 ('date_limit', models.CharField(max_length=128, verbose_name=b'fecha limite')),
                 ('description', models.TextField(verbose_name=b'descripci\xc3\xb3n')),
                 ('date', models.DateTimeField(verbose_name=b'fecha')),
-                ('quota', models.PositiveIntegerField(verbose_name=b'cupo')),
                 ('place', models.CharField(max_length=64, verbose_name=b'lugar')),
-                ('price', models.DecimalField(null=True, verbose_name=b'precio', max_digits=6, decimal_places=2, blank=True)),
                 ('banner2', models.ImageField(upload_to=b'banners', verbose_name=b'banner2')),
                 ('advertising', models.FileField(upload_to=b'archives', null=True, verbose_name=b'publicidad', blank=True)),
                 ('timetable', models.FileField(upload_to=b'archives', null=True, verbose_name=b'cronograma', blank=True)),
@@ -60,7 +60,9 @@ class Migration(migrations.Migration):
                 ('how_to_get', models.FileField(upload_to=b'archives', null=True, verbose_name=b'como llegar', blank=True)),
                 ('payment_method', models.CharField(max_length=64, null=True, verbose_name=b'm\xc3\xa9todo de pago', blank=True)),
                 ('payment_place', models.CharField(max_length=64, null=True, verbose_name=b'lugar de pago', blank=True)),
-                ('state', models.PositiveIntegerField(verbose_name=b'estado', choices=[(1, b'Activado'), (2, b'Desactivado')])),
+                ('date_stage', models.CharField(max_length=128, null=True, verbose_name=b'fecha etapa 1', blank=True)),
+                ('date_stage2', models.CharField(max_length=128, null=True, verbose_name=b'fecha etapa 2', blank=True)),
+                ('state', models.PositiveIntegerField(verbose_name=b'estado', choices=[(1, b'Activado'), (2, b'NoCupo'), (3, b'Desactivado'), (4, b'Finalizado')])),
                 ('results_general', models.FileField(upload_to=b'archives', null=True, verbose_name=b'resuldos general', blank=True)),
                 ('results_category', models.FileField(upload_to=b'archives', null=True, verbose_name=b'resultados x categoria', blank=True)),
                 ('gallery_link', models.CharField(max_length=255, null=True, verbose_name=b'galeria', blank=True)),
@@ -89,6 +91,8 @@ class Migration(migrations.Migration):
                 ('email', models.EmailField(max_length=75, verbose_name=b'correo elecr\xc3\xb3nico')),
                 ('group', models.CharField(max_length=64, null=True, verbose_name=b'agrupaci\xc3\xb3n', blank=True)),
                 ('size', models.PositiveIntegerField(verbose_name=b'talle de remera', choices=[(1, b'XS'), (2, b'S'), (3, b'M'), (4, b'L'), (5, b'XL'), (6, b'XXL')])),
+                ('payment', models.PositiveIntegerField(default=1, verbose_name=b'sexo', choices=[(1, b'NO'), (2, b'SI')])),
+                ('payment_number', models.CharField(max_length=32, null=True, verbose_name=b'numero de pago', blank=True)),
                 ('assigned_numbers', models.CharField(max_length=6, null=True, verbose_name=b'numero', blank=True)),
                 ('category', models.ForeignKey(related_name='runners_category', verbose_name=b'categor\xc3\xada', to='runs.Category')),
                 ('distance', models.ForeignKey(related_name='runners_distance', verbose_name=b'distancia', to='runs.Distance')),
@@ -99,5 +103,9 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': 'corredores',
             },
             bases=(models.Model,),
+        ),
+        migrations.AlterUniqueTogether(
+            name='runner',
+            unique_together=set([('run', 'email')]),
         ),
     ]

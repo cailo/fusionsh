@@ -1,0 +1,29 @@
+[
+{
+    "fields": {
+        "price": "$200 / $250",
+        "name": "6KM",
+        "quota": 300
+    },
+    "model": "runs.distance",
+    "pk": 1
+},
+{
+    "fields": {
+        "price": "$250 / $300",
+        "name": "12KM",
+        "quota": 150
+    },
+    "model": "runs.distance",
+    "pk": 2
+},
+{
+    "fields": {
+        "price": "$300 / $350",
+        "name": "18KM",
+        "quota": 150
+    },
+    "model": "runs.distance",
+    "pk": 3
+}
+]

@@ -23,7 +23,7 @@ class Distance(models.Model):
     quota = models.PositiveIntegerField('cupo')
 
     def __str__(self):
-        return '{} - {} - {}'.format(self.name, self.price, self.quota)
+        return '{} - {}'.format(self.name, self.price)
     
     def is_quota(self):
         if self.quota > 0:
@@ -68,6 +68,8 @@ class Run(models.Model):
     how_to_get = models.FileField('como llegar', upload_to='archives', null=True, blank=True)
     payment_method = models.CharField('método de pago', max_length=64, null=True, blank=True)
     payment_place = models.CharField('lugar de pago', max_length=64, null=True, blank=True)
+    date_stage = models.CharField('fecha etapa 1', max_length=128, null=True, blank=True)
+    date_stage2 = models.CharField('fecha etapa 2', max_length=128, null=True, blank=True)
     categories = models.ManyToManyField(Category, verbose_name='categorías')
     state = models.PositiveIntegerField('estado', choices=STATE_CHOICES)
     results_general = models.FileField('resuldos general', upload_to='archives', null=True, blank=True)
@@ -110,6 +112,10 @@ class Runner(models.Model):
         (5, 'XL'),
         (6, 'XXL'),
     )
+    PAYMENT_CHOICES = (
+        (1, 'NO'),
+        (2, 'SI'),
+    )
     run = models.ForeignKey(Run, related_name='runners', verbose_name='carrera')
     firstname = models.CharField('nombre/s', max_length=64)
     lastname = models.CharField('apellido/s', max_length=64)
@@ -125,7 +131,9 @@ class Runner(models.Model):
     distance = models.ForeignKey(Distance, related_name='runners_distance', verbose_name='distancia')
     category = models.ForeignKey(Category, related_name='runners_category', verbose_name='categoría')
     size = models.PositiveIntegerField('talle de remera', choices=SIZE_CHOICES)
-    assigned_numbers = models.CharField('numero', max_length=6, null=True, blank=True)
+    payment = models.PositiveIntegerField('pago', choices=PAYMENT_CHOICES, default=1)
+    payment_number = models.CharField('numero de pago', max_length=32, null=True, blank=True)
+    assigned_numbers = models.CharField('numero asignado', max_length=6, null=True, blank=True)
 
     def __str__(self):
         return '{} - {} {}'.format(self.document, self.firstname, self.lastname)

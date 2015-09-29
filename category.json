@@ -1,0 +1,114 @@
+[
+{
+    "fields": {
+        "name": "CADETES: 13 a 15 a\u00f1os"
+    },
+    "model": "runs.category",
+    "pk": 1
+},
+{
+    "fields": {
+        "name": "JUVENILES: 16 a 19 a\u00f1os"
+    },
+    "model": "runs.category",
+    "pk": 2
+},
+{
+    "fields": {
+        "name": "MAYORES A: 20 a 24 a\u00f1os"
+    },
+    "model": "runs.category",
+    "pk": 3
+},
+{
+    "fields": {
+        "name": "MAYORES B: 25 a 29 a\u00f1os"
+    },
+    "model": "runs.category",
+    "pk": 4
+},
+{
+    "fields": {
+        "name": "PRE VETEREANOS A: 30 a 34 a\u00f1os"
+    },
+    "model": "runs.category",
+    "pk": 5
+},
+{
+    "fields": {
+        "name": "PRE VETEREANOS A: 35 a 39 a\u00f1os"
+    },
+    "model": "runs.category",
+    "pk": 6
+},
+{
+    "fields": {
+        "name": "VETERANOS A: 40 a 44 a\u00f1os"
+    },
+    "model": "runs.category",
+    "pk": 7
+},
+{
+    "fields": {
+        "name": "VETERANOS B: 45 a 49 a\u00f1os"
+    },
+    "model": "runs.category",
+    "pk": 8
+},
+{
+    "fields": {
+        "name": "VETERANOS C: 50 a 54 a\u00f1os"
+    },
+    "model": "runs.category",
+    "pk": 9
+},
+{
+    "fields": {
+        "name": "VETERANOS D: 55 a 59 a\u00f1os"
+    },
+    "model": "runs.category",
+    "pk": 10
+},
+{
+    "fields": {
+        "name": "VETERANOS E: 60 a 64 a\u00f1os"
+    },
+    "model": "runs.category",
+    "pk": 11
+},
+{
+    "fields": {
+        "name": "VETERANOS F: 65 a 69 a\u00f1os"
+    },
+    "model": "runs.category",
+    "pk": 12
+},
+{
+    "fields": {
+        "name": "VETERANOS G : 70 a 74 a\u00f1os"
+    },
+    "model": "runs.category",
+    "pk": 13
+},
+{
+    "fields": {
+        "name": "VETERANOS H: 75 a 79 a\u00f1os"
+    },
+    "model": "runs.category",
+    "pk": 14
+},
+{
+    "fields": {
+        "name": "VETERANOS I: m\u00e1s de 80 a\u00f1os"
+    },
+    "model": "runs.category",
+    "pk": 15
+},
+{
+    "fields": {
+        "name": "ESPECIAL"
+    },
+    "model": "runs.category",
+    "pk": 16
+}
+]
