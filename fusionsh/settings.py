@@ -122,7 +122,7 @@ TEMPLATE_DIRS = (
 
 EMAIL_HOST = 'smtp.zoho.com'
 EMAIL_HOST_USER = 'no-reply@fusionsh.com.ar'
-EMAIL_HOST_PASSWORD = 'sl987654'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
