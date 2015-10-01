@@ -1,5 +1,6 @@
 {% load static %}
 {% load bootstrap3 %}
+{% load django_markdown %}
 {% load compress %}
 
 <!DOCTYPE html>
@@ -8,16 +9,16 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Fusion SH</title>
-
+        <title>{{rundata.name}} - Fusion SH</title>
+        <link rel="shortcut icon" type="image/png" href="{% static "images/favicon.png" %}"/>
         {% compress css %}
         <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/css/bootstrap-select.min.css">
-        <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
-        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/bootstrap-theme.css' %}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap-select.min.css' %}">	
+	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap-theme.css' %}"> 
         <link rel="stylesheet" href="{% static 'css/runs.css' %}">
 
         {% endcompress %}
@@ -39,7 +40,7 @@
 <script> 
 function initialize() {
   var mapCanvas = document.getElementById('map');
-  var mapCenter = new google.maps.LatLng(-33.2331247,-66.2264154);
+  var mapCenter = new google.maps.LatLng(-33.232604, -66.226753);
   var mapOptions = {
         center: mapCenter,
         zoom: 16,
@@ -98,7 +99,7 @@ header{
         ================================================== -->
 <section class="features">
   <div class="container">
-    <div class="row">
+    <div class="row fusion">
       <h1>FUSION</h1>
       <p class="lead">(mente+cuerpo)</p>
     </div>
@@ -110,20 +111,22 @@ header{
     <div class="row">
       <div class="col-md-offset-2 col-md-8">
         <h1>¿Hasta cuándo hay tiempo?</h1>
-        <p class="lead">Hasta el <b>{{rundata.date_limit}}</p>
+        <p>Hasta el <b>{{rundata.date_limit}}</b></p>
         </br>
-        <h1>Qué requerimientos debe respetar?</h1>
-        <p class="lead">{{rundata.description}}</p>
-	{% if rundata.price %}
-	<p class="lead"><b>Precio:</b> ${{rundata.price}}</p>
-	{% endif %}
+        <h1>¿Cómo hago la inscripción?</h1>
+        <p>{{rundata.description|markdown}}</p>
 	{% if rundata.payment_method %}
-	<p class="lead"><b>Forma de Pago:</b> {{rundata.payment_method}}</p>
+	<h2>Formas de Pago</h2><p>{{rundata.payment_method}}</p>
 	{% endif %}
 	{% if rundata.payment_place %}
-	<p class="lead"><b>Lugar de Pago:</b> {{rundata.payment_place}}</p>
+        <h2>Lugares de Pago</h2>{% for payment_place in rundata.payment_place.all %}<p>{{ payment_place }}</p>{% if not forloop.last %} {% endif %}{% endfor %}
 	{% endif %}
-	<p class="lead"><b>Distancias:</b><br />1 Etapa hasta el {{rundata.date_stage}}<br />2 Etapa hasta el {{rundata.date_stage2}}<br /><br /> {% for distance in rundata.distances.all %}{{ distance }}<br />{% if not forloop.last %} {% endif %}{% endfor %}</p>
+	<h2>Distancias</h2>
+            <p>1 Etapa hasta el {{rundata.date_stage}}<br />2 Etapa hasta el {{rundata.date_stage2}}</p><br />
+            {% for distance in rundata.distances.all %}<p>{{ distance }}</p>{% if not forloop.last %} {% endif %}{% endfor %}
+ 	{% if rundata.medical_demarcation %}<br />
+	<a target="_blank" href="{{ MEDIA_URL }}{{rundata.medical_demarcation}}" class="btn btn-lg btn-info">Ficha Medica y Deslinde</a></br></br>
+        {% endif %}
  	{% if rundata.medical_record %}
 	<a target="_blank" href="{{ MEDIA_URL }}{{rundata.medical_record}}" class="btn btn-lg btn-info">Ficha Medica</a></br></br>
 	{% endif %}
@@ -142,7 +145,6 @@ header{
 	{% if rundata.accommodation %}
 	<a target="_blank" href="{{ MEDIA_URL }}{{rundata.accommodation}}" class="btn btn-lg btn-info" >Alojamientos</a></p>
 	{% endif %}
-
       </div>
     </div>
   </div>
@@ -214,15 +216,15 @@ header{
 </section>
 
 {% compress js %}
-        <script src="{% static "js/modernizr-latest.js" %}"></script>
+	<script src="{% static "js/modernizr-latest.js" %}"></script> 
         <!-- jQuery -->
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="{% static 'js/jquery-1.9.1.js' %}"></script>
         <!-- Bootstrap -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/locales/bootstrap-datepicker.es.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/bootstrap-select.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/js/i18n/defaults-es_CL.min.js"></script>
+        <script src="{% static 'js/bootstrap.js' %}"></script>
+        <script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap-datepicker.es.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap-select.min.js' %}"></script>
+        <script src="{% static 'js/defaults-es_CL.min.js' %}"></script>
         <script type="text/javascript">
         $(function () {
             $('#id_birthday').datepicker({

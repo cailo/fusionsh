@@ -9,7 +9,11 @@ from django.db.models import TextField
 
 from import_export.admin import ImportExportModelAdmin
 from django.forms import CheckboxSelectMultiple
-from runs.models import Category, Distance, Run, Runner
+from runs.models import Category, Distance, Run, Runner, Paymentplace
+
+@admin.register(Paymentplace)
+class CategoryAdmin(admin.ModelAdmin):
+    pass
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -32,8 +36,8 @@ class RunAdmin(MarkdownModelAdmin):
 @admin.register(Runner)
 class RunnerAdmin(ImportExportModelAdmin):
     search_fields = ['firstname', 'lastname', 'document']
-    list_filter = ('run__name', 'category', 'gender', 'distance', 'nationality')
-    list_display = ('firstname', 'lastname', 'document', 'gender', 'distance', 'category')
+    list_filter = ('run__name', 'category', 'gender', 'distance', 'payment')
+    list_display = ('firstname', 'lastname', 'document', 'gender', 'distance', 'category', 'payment')
     #list_display = ('firstname', 'lastname', 'document', 'gender', 'distance', 'get_name')
     def get_name(self, obj):
         return obj.run.name

@@ -1,0 +1,23 @@
+[
+{
+    "fields": {
+        "name": "Gimnasio UNSL (FUSION) - Lavalle 950"
+    },
+    "model": "runs.paymentplace",
+    "pk": 1
+},
+{
+    "fields": {
+        "name": "One Sport - Pringles 728"
+    },
+    "model": "runs.paymentplace",
+    "pk": 2
+},
+{
+    "fields": {
+        "name": "Estilo Libre - Colon 613"
+    },
+    "model": "runs.paymentplace",
+    "pk": 3
+}
+]

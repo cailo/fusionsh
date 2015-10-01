@@ -42,4 +42,4 @@ class RunnerForm(forms.ModelForm):
 
     class Meta:
         model = Runner
-        exclude = ('run', 'assigned_numbers')
+        exclude = ('run', 'assigned_numbers', 'payment', 'payment_number')

@@ -39,6 +39,18 @@ class Distance(models.Model):
         verbose_name = 'distancia'
         verbose_name_plural = 'distancias'
 
+class Paymentplace(models.Model):
+    """
+    """
+    name = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Lugar de pago'
+        verbose_name_plural = 'Lugares de pago'
+
 class Run(models.Model):
     """
     """
@@ -62,12 +74,13 @@ class Run(models.Model):
     timetable = models.FileField('cronograma', upload_to='archives', null=True, blank=True)
     demarcation = models.FileField('deslinde', upload_to='archives', null=True, blank=True)
     medical_record = models.FileField('ficha medica', upload_to='archives', null=True, blank=True)
+    medical_demarcation = models.FileField('ficha medica y deslinde', upload_to='archives', null=True, blank=True)
     regulation = models.FileField('reglamento', upload_to='archives', null=True, blank=True)
     travel = models.FileField('recorrido', upload_to='archives', null=True, blank=True)
     accommodation = models.FileField('alojamiento', upload_to='archives', null=True, blank=True)
     how_to_get = models.FileField('como llegar', upload_to='archives', null=True, blank=True)
     payment_method = models.CharField('método de pago', max_length=64, null=True, blank=True)
-    payment_place = models.CharField('lugar de pago', max_length=64, null=True, blank=True)
+    payment_place = models.ManyToManyField(Paymentplace, verbose_name='lugares de pago')
     date_stage = models.CharField('fecha etapa 1', max_length=128, null=True, blank=True)
     date_stage2 = models.CharField('fecha etapa 2', max_length=128, null=True, blank=True)
     categories = models.ManyToManyField(Category, verbose_name='categorías')

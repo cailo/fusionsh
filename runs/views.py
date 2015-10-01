@@ -37,14 +37,16 @@ class RunnerCreateView(CreateView):
         distance.decrement_quota()
 
         run = Run.objects.get(pk=self.kwargs['pk'])
-
+        listpayment = run.payment_place
+        
         subject = 'Inscripciones %s - Fusion' % (
             run.name
             )
-        message = '%s %s te registraste correctamente en la carrera %s. \n\n Cualquier duda o inconveniente comunicarse: \n tel.: 2664488446 / info@fusionsh.com.ar \n\n Fusion.' % (
+
+        message = '%s %s te registraste correctamente en la carrera %s.\n\n Datos para pagar a traves de deposito bancario. \n\n FUSION S.H. \n Banco Supervielle. \n Nro. de Cuenta en pesos: ⁠⁠02267446-001 \n CBU: 0270101710022674460013 \n\n Cualquier duda o inconveniente comunicarse: \n Cel.: 2664488446 / email: info@fusionsh.com.ar \n\n Fusion (mente+cuerpo) \n\n Por favor no responder este mail.' % (
             form.cleaned_data['firstname'],
             form.cleaned_data['lastname'],
-            run.name
+            run.name,
             )
 
         send_mail(
