@@ -29,7 +29,7 @@ DEBUG = False
 
 #TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '104.131.54.188', 'fusionsh.com.ar', '.fusionsh.com.ar']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Application definition
 
@@ -78,9 +78,9 @@ WSGI_APPLICATION = 'fusionsh.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'fusionsh',
-        'USER': 'cailo',
-        'PASSWORD': 'lajdoque',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -135,7 +135,7 @@ TEMPLATE_DIRS = (
 
 EMAIL_HOST = 'smtp.zoho.com'
 EMAIL_HOST_USER = 'no-reply@fusionsh.com.ar'
-EMAIL_HOST_PASSWORD = 'sl987654'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
