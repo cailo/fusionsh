@@ -8,13 +8,14 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Fusion SH</title>
-
+        <title>{{rundata.name}} - Fusion SH</title>
+        <link rel="shortcut icon" type="image/png" href="{% static "images/favicon.png" %}"/>
+       
         {% compress css %}
         <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.5/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap-select.min.css' %}">
         <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
         <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/bootstrap-theme.css' %}">
@@ -98,9 +99,9 @@ header{
 {% compress js %}
         <script src="{% static "js/modernizr-latest.js" %}"></script>
         <!-- jQuery -->
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="{% static 'js/jquery-1.9.1.js' %}"></script>
         <!-- Bootstrap -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.js"></script>
+        <script src="{% static 'js/bootstrap.js' %}"></script>
 {% endcompress %}
 
 {% endblock %}

@@ -15,5 +15,5 @@ urlpatterns = [
     url(r'^quienes-somos/', AboutView.as_view(), name='about'),
     url(r'^actividades/', ActivitiesView.as_view(), name='activities'),
     url('^markdown/', include( 'django_markdown.urls')),
-    url(r'^/sistema/admin/', include(admin.site.urls)),
+    url(r'^sistema/admin/', include(admin.site.urls)),
 ]
