@@ -81,6 +81,11 @@
 	.btn-action:focus { color:#fff; background: #FF9B22; }
 	.btn-action:active {	background: #FF8C00; }
 
+.col-lg-4, .col-md-4, .col-sm-12 {
+  padding-left: 2px;
+}
+
+
 
 /*******************************/
 /*           Jumbotron         */
@@ -104,3 +109,4 @@ height: 550px; /* This is your slider height */
 width:100%; 
 margin:0 auto; /* center your carousel if other than 100% */ 
 }
+

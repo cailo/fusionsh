@@ -122,9 +122,10 @@ header{
         <h2>Lugares de Pago</h2>{% for payment_place in rundata.payment_place.all %}<p>{{ payment_place }}</p>{% if not forloop.last %} {% endif %}{% endfor %}
 	{% endif %}
 	<h2>Distancias</h2>
-            <p>1 Etapa hasta el {{rundata.date_stage}}<br />2 Etapa hasta el {{rundata.date_stage2}}</p><br />
-            {% for distance in rundata.distances.all %}<p>{{ distance }}</p>{% if not forloop.last %} {% endif %}{% endfor %}
- 	{% if rundata.medical_demarcation %}<br />
+        {% for distance in rundata.distances.all %}<p>{{ distance }}</p>{% if not forloop.last %} {% endif %}{% endfor %}
+        <p>Los precios de las distancias varian segun las etapas de inscripción.</p>
+        <p>1 Etapa hasta el {{rundata.date_stage}}<br />2 Etapa hasta el {{rundata.date_stage2}}</p><br />
+        {% if rundata.medical_demarcation %}<br />
 	<a target="_blank" href="{{ MEDIA_URL }}{{rundata.medical_demarcation}}" class="btn btn-lg btn-info">Ficha Medica y Deslinde</a></br></br>
         {% endif %}
  	{% if rundata.medical_record %}

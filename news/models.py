@@ -16,7 +16,9 @@ class NewQuerySet(models.QuerySet):
 
 class New(models.Model):
     title = models.CharField('titulo', max_length=255)
+    resume = models.TextField('resumen')
     body = models.TextField('contenido')
+    image_new = models.ImageField('image', upload_to='images', null=True, blank=True)
     slug = models.SlugField(max_length=255, unique=True)
     publish = models.BooleanField('publicado', default=True)
     created = models.DateTimeField(auto_now_add=True)

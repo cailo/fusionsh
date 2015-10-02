@@ -54,7 +54,7 @@
                                         <div class="box">
                                             	<p class="title"><strong>{{ object.title }}</strong></p>
                 				{{ object.created|date:"d M Y" }}                            
-						<p>{{ object.body|truncatewords:40  }}</p>
+						<p>{{ object.resume|truncatewords:30  }}</p>
                                         </div>
                                         <div>
                                             <a href="{% url "new_detail" slug=object.slug %}" class="btn-inline">+Info</a>
